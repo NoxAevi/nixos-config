@@ -15,7 +15,7 @@
             ./modules/impermanence/impermanence.nix
             ./modules/home-manager/home-manager.nix
         ];
-
+  programs.ssh.startAgent = true;
   #Flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
   programs.hyprland.enable = true;

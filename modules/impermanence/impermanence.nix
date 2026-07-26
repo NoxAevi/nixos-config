@@ -20,7 +20,9 @@
 
         users.NoxAevi = {
             files = [];
-            directories = [];
+            directories = [ 
+		{ directory = ".ssh"; mode = "0700"; }
+	    ];
         };
     };
 
