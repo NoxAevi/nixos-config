@@ -22,6 +22,7 @@
             files = [];
             directories = [ 
 		{ directory = ".ssh"; mode = "0700"; }
+                { directory = ".dotfiles"; mode = "0700"; }
 	    ];
         };
     };
