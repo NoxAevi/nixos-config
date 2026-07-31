@@ -1,0 +1,5 @@
+local terminal = "kitty"
+local fileManager = "terminal yazi" 
+local menu = "rofi -show drun -show-icons"
+local bar = "waybar"
+local wallpaper = "awww-daemon"
