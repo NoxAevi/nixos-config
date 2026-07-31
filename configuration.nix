@@ -26,7 +26,13 @@
      wget
      git
      kitty
+     rofi
+     awww
    ];
+
+  programs.yazi.enable = true;
+  programs.waybar.enable = true;
+  
   users.users.root.initialPassword = "root";
   system.stateVersion = "26.05"; # Did you read the comment?
 
