@@ -1,0 +1,90 @@
+{
+    "layer": "bottom",
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["group/sys", "custom/power"],
+    "hyprland/workspaces": {
+	"format": " ",
+	"format-icons": {
+	    "1": "1",
+	    "2": "2",
+	    "3": "3",
+	    "4": "4",
+	    "5": "5",
+	    "active": "A"
+	},
+    	"persistent-workspaces": {
+	    "*": 5 // 5 workspaces by default on every monitor
+        }
+    },
+    "battery": {
+    	"interval": 60,
+    	"format": "{capacity}% {icon}",
+    	"format-icons": {
+        	"default": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", 			"󰂁", "󰂂", "󰁹"],
+        	"charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞"			, "󰂊", "󰂋", "󰂅"]
+    	},
+
+	"states": {
+		"warning": 30,
+		"critical": 15,
+	},
+    },
+    "clock": {
+        "format-alt": "{:%a, %d. %b  %H:%M}"
+    },
+
+    "network": {
+    	"interface": "wlp2s0",
+    	"format": "{ifname}",
+    	"format-wifi": "{icon}",
+        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    	"format-disconnected": "DISCONNECTED 󰤯", //An empty format will hide the module.
+    	"tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    	"tooltip-format-wifi": "{essid} ({signalStrength}%) {icon}",
+    	"tooltip-format-ethernet": "{ifname} ",
+    	"tooltip-format-disconnected": "Disconnected",
+    	"max-length": 50,
+	"format-icons": [
+	    "󰤟",
+	    "󰤢",
+	    "󰤥",
+	    "󰤨"
+	]
+    },
+
+    "pulseaudio": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon} ",
+    "format-muted": "",
+    "format-icons": {
+        "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+        "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
+        "headphone": "",
+        "headset": "",
+        "phone": "",
+        "phone-muted": "",
+        "portable": "",
+        "car": "",
+        "default": ["", "", ""]
+    },
+    "scroll-step": 1,
+    "on-click": "easyeffects",
+    "ignored-sinks": ["Easy Effects Sink"]
+    },
+
+    "group/sys": {
+	    "orientation": "horizontal",
+	    "modules": [
+		    "network",
+		    "pulseaudio",
+		    "battery"
+	    ]
+    },
+
+    "custom/power": {
+        "format" : "⏻",
+		"tooltip": false,
+		"on-click": "rofi -show p -modi p:rofi-power-menu",
+    }
+}

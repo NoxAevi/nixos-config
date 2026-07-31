@@ -1,0 +1,80 @@
+@import "./colors.css";
+
+* {
+        all: unset;
+	font-family: "sans-serif";
+}
+
+
+.modules-left {
+	padding: 5px 5px;
+	margin: 10px 0px 0px 10px;
+	background-color: @bg0;
+	border: 1px solid @outline0;
+	border-radius: 10px;
+}
+
+#workspaces button{
+	margin: 0px 2px;
+	min-width: 20px;
+	background-color: @outline1;
+	border-radius: 99px;
+	transition: all 300ms ease-in-out;
+}
+
+#workspaces button.active {
+	background-color: @white;
+	min-width: 40px;
+}
+
+.modules-center {
+	margin: 10px 0px 0px 0px;
+	padding: 5px 5px;
+	border: 1px solid @outline0;
+	background-color: @bg0;
+	border-radius:5px;
+}
+
+#sys {
+	margin: 10px 10px 0px 0px;
+	padding: 5px 10px;
+	background-color: @bg0;
+	border-radius:5px;
+	border: 1px solid @outline0;
+}
+
+
+#pulseaudio {
+	margin: 0px 10px;
+}
+
+#battery.charging{
+	color: @green;
+}
+
+#battery.warning:not(.charging){
+	color: @yellow;
+}
+
+@keyframes blink {
+	to {
+		color: @white;
+	}
+}
+
+#battery.critical:not(.charging){
+	color: @red;
+	animation-name: blink;
+    	animation-duration: 0.5s;
+    	animation-timing-function: steps(12);
+    	animation-iteration-count: infinite;
+    	animation-direction: alternate;
+}
+
+
+#custom-power {
+	margin: 10px 10px 0px 0px;
+	background-color: @bg0;
+	min-width: 33px;
+	border-radius: 99px;
+}

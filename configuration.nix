@@ -15,10 +15,9 @@
             ./modules/impermanence/impermanence.nix
             ./modules/home-manager/home-manager.nix
         ];
-  programs.ssh.startAgent = true;
-  #Flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
   programs.hyprland.enable = true;
+  programs.ssh.startAgent = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -26,6 +25,7 @@
      vim
      wget
      git
+     kitty
    ];
   users.users.root.initialPassword = "root";
   system.stateVersion = "26.05"; # Did you read the comment?
