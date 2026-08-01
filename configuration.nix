@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
     imports =
@@ -22,13 +22,20 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
    environment.systemPackages = with pkgs; [
-     vim
+     neovim
      wget
      git
      kitty
      rofi
      awww
-   ];
+   ] ++ [ inputs.zen-browser.packages."${system}".default ];
+
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+    nerd-fonts.noto
+  ];  
 
   programs.yazi.enable = true;
   programs.waybar.enable = true;
