@@ -8,13 +8,84 @@
     imports =
         [ # Include the results of the hardware scan and modules.
             ./hardware-configuration.nix
-            ./modules/bootloader/grub.nix
-            ./modules/time/time.nix
-            ./modules/networking/networking.nix
-            ./modules/users/NoxAevi/NoxAevi.nix
             ./modules/impermanence/impermanence.nix
             ./modules/home-manager/home-manager.nix
         ];
+
+
+	environment.persistence."/nix/persist" = {
+		enable = false;
+		hideMounts = true;
+
+		files = [
+			"/etc/machine-id"; #check if needed
+		];
+
+		directories = [
+			"/etc/nixos"
+			"/var/log"
+			"/var/lib/bluetooth"
+			"/var/lib/nixos"
+			"/var/lib/systemd/coredump"
+			"/var/lib/systemd/timers"
+			"/etc/NetworkManager/system-connections"
+		];
+	};
+
+
+	boot.loader = {
+		grub = {
+			enable = true;
+			device = "nodev";
+			efiSupport = true;
+		};
+		efi.canTouchEfiVariables = true;
+	};
+
+
+	time.timeZone = "America/New_York";
+
+
+	networking = {
+		hostName = "nixos";
+		networkmanager.enable = true;
+	};
+
+
+	programs.zsh.enable = true;
+	programs.zsh = {
+		enable = true;
+		shellAliases = {
+			nrs = "sudo nixos-rebuild switch --flake /home/NoxAevi/.dotfiles/nixos";
+			vim = "nvim";
+		};
+	};
+	
+	users.users.NoxAevi = {
+		extraGroups = [ "wheel" ];
+		home = "/home/NoxAevi";
+		shell = pkgs.zsh;
+		initialPassword = "user";
+
+		isNormalUser = true;
+	};
+	
+	environment.persistence."/nix/persist".users.NoxAevi = {
+		directories = [
+			{ directory = ".ssh"; mode = "0700"; }
+			{ directory = ".dotfiles"; mode = "0700"; }
+			{ directory = ".config/zen"; mode = "0700"; }
+			{ directory = ".cache/zen"; mode = "0700"; } #check the zen dir if needed for persist
+		];
+		files = [];
+	};
+
+	programs.git = {
+		enable = true;
+		config.init.defaultBranch = "main";
+	};
+
+  services.flatpak.enable = true;
   programs.hyprland.enable = true;
   programs.ssh.startAgent = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
