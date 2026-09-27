@@ -8,17 +8,15 @@
     imports =
         [ # Include the results of the hardware scan and modules.
             ./hardware-configuration.nix
-            ./modules/impermanence/impermanence.nix
-            ./modules/home-manager/home-manager.nix
         ];
 
 
 	environment.persistence."/nix/persist" = {
-		enable = false;
+		enable = true;
 		hideMounts = true;
 
 		files = [
-			"/etc/machine-id"; #check if needed
+			"/etc/machine-id" #check if needed
 		];
 
 		directories = [
@@ -32,6 +30,7 @@
 		];
 	};
 
+	systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/hypr"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/hypr";
 
 	boot.loader = {
 		grub = {
@@ -52,7 +51,6 @@
 	};
 
 
-	programs.zsh.enable = true;
 	programs.zsh = {
 		enable = true;
 		shellAliases = {
