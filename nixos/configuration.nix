@@ -97,6 +97,7 @@
      kitty
      rofi
      awww
+     starship
    ] ++ [ inputs.zen-browser.packages."${system}".default ];
 
   fonts.packages = with pkgs; [
