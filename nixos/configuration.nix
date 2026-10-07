@@ -100,6 +100,8 @@
      starship
    ] ++ [ inputs.zen-browser.packages."${system}".default ];
 
+   systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/starship.toml"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
+
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
