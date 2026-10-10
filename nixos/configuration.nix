@@ -58,7 +58,7 @@
 			vim = "nvim";
 		};
 	};
-	
+	systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.zshrc"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/zsh/zshrc";
 	users.users.NoxAevi = {
 		extraGroups = [ "wheel" ];
 		home = "/home/NoxAevi";

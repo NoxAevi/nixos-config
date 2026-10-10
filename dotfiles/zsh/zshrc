@@ -1,0 +1,4 @@
+export STARSHIP_CONFIG=/home/NoxAevi/.config/starship.toml
+
+# starship
+eval "$(starship init zsh)"
