@@ -1,25 +1,24 @@
 "$schema" = 'https://starship.rs/config-schema.json'
+# useful characters  
 
 format = """
-[ ](blue)\
-$os\
-[ ](bg:red fg:blue)\
 $username\
 [ ](red)\
 $directory\
 $git_branch\
 $git_status\
-$fill\
+$time\
 $line_break\
 $character
 """
-
-[os]
-disabled = false
-style = "bg:blue fg:white"
 
 [username]
 disabled = false
 show_always = true
 style_user = "bg:red"
-format = '[$user ]($style)'
+format = '[$user]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+format = '[$time]($style)'

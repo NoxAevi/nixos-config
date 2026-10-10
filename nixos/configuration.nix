@@ -77,6 +77,7 @@
 			{ directory = ".dotfiles"; mode = "0700"; }
 			{ directory = ".config/zen"; mode = "0700"; }
 			{ directory = ".cache/zen"; mode = "0700"; } #check the zen dir if needed for persist
+			"Wallpapers"
 		];
 		files = [];
 	};
