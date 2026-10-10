@@ -2,6 +2,9 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
+# TODO: Have some simpler way to do symlinks (so much writing aa)
+# Separate pkgs into a nix module
+
 { inputs, config, lib, pkgs, ... }:
 
 {
@@ -101,7 +104,7 @@
    ] ++ [ inputs.zen-browser.packages."${system}".default ];
 
    systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/starship.toml"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
-
+	systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/kitty"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/kitty";
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
