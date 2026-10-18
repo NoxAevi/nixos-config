@@ -7,6 +7,10 @@
 
 { inputs, config, lib, pkgs, ... }:
 
+let
+	dotlink = d: s: {systemd.tmpfiles.settings.dotlinks.${s}.L.argument = d;};
+in
+
 {
     imports =
         [ # Include the results of the hardware scan and modules.
@@ -104,7 +108,8 @@
      starship
    ] ++ [ inputs.zen-browser.packages."${system}".default ];
 
-   systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/starship.toml"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
+   dotlink "/home/NoxAevi/.config/starship.toml" "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
+   #systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/starship.toml"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
 	systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/kitty"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/kitty";
   fonts.packages = with pkgs; [
     noto-fonts
