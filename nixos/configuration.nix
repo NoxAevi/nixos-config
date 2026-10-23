@@ -7,15 +7,17 @@
 
 { inputs, config, lib, pkgs, ... }:
 
-let
-	dotlink = d: s: {systemd.tmpfiles.settings.dotlinks.${s}.L.argument = d;};
-in
+#let
+	#dotlink = d: s: {systemd.tmpfiles.settings.dotlinks.${s}.L.argument = d;};
+#in
 
 {
     imports =
         [ # Include the results of the hardware scan and modules.
             ./hardware-configuration.nix
         ];
+
+	nixpkgs.config.allowUnfree = true;
 
 
 	environment.persistence."/nix/persist" = {
@@ -81,6 +83,11 @@ in
 			{ directory = ".dotfiles"; mode = "0700"; }
 			{ directory = ".config/zen"; mode = "0700"; }
 			{ directory = ".cache/zen"; mode = "0700"; } #check the zen dir if needed for persist
+			{ directory = ".config/vesktop"; mode = "0700"; }
+			{ directory = ".local/share/Anki2"; mode = "0700"; }
+			{ directory = ".config/obsidian"; mode = "0700"; }
+			{ directory = ".config/easyeffects"; mode = "0700"; }
+
 			"Wallpapers"
 		];
 		files = [];
@@ -106,10 +113,16 @@ in
      rofi
      awww
      starship
+     vesktop
+     obsidian
+     anki
+     easyeffects
    ] ++ [ inputs.zen-browser.packages."${system}".default ];
 
-   dotlink "/home/NoxAevi/.config/starship.toml" "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
-   #systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/starship.toml"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
+   systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/wallpapers"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/wallpapers";
+
+   #dotlink "/home/NoxAevi/.config/starship.toml" "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
+   systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/starship.toml"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
 	systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/kitty"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/kitty";
   fonts.packages = with pkgs; [
     noto-fonts
