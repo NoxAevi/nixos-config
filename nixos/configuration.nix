@@ -87,6 +87,7 @@
 			{ directory = ".local/share/Anki2"; mode = "0700"; }
 			{ directory = ".config/obsidian"; mode = "0700"; }
 			{ directory = ".config/easyeffects"; mode = "0700"; }
+			{ directory = "temp"; mode = "0700"; }
 
 			"Wallpapers"
 		];
