@@ -1,3 +1,5 @@
+export EDITOR=nvim
+
 export STARSHIP_CONFIG=/home/NoxAevi/.config/starship.toml
 
 # starship

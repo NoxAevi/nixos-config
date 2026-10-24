@@ -59,6 +59,40 @@
 		networkmanager.enable = true;
 	};
 
+	hardware.bluetooth = {
+  		enable = true;
+  		powerOnBoot = true;
+  		settings = {
+    			General = {
+     				# Shows battery charge of connected devices on supported
+      				# Bluetooth adapters. Defaults to 'false'.
+      				Experimental = true;
+      				# When enabled other devices can connect faster to us, however
+      				# the tradeoff is increased power consumption. Defaults to
+      				# 'false'.
+      				FastConnectable = true;
+    			};
+    			Policy = {
+      				# Enable all controllers when they are found. This includes
+      				# adapters present on start as well as adapters that are plugged
+      				# in later on. Defaults to 'true'.
+      				AutoEnable = true;
+    			};
+  		};
+	};
+
+
+	hardware.graphics = {
+		#enable = true;
+		#enable32Bit = true;
+	};
+	hardware.amdgpu = {
+		overdrive.enable = true;
+		opencl.enable = true;
+		initrd.enable = true;
+	};
+	services.lact.enable = true;
+
 
 	programs.zsh = {
 		enable = true;
@@ -88,6 +122,14 @@
 			{ directory = ".config/obsidian"; mode = "0700"; }
 			{ directory = ".config/easyeffects"; mode = "0700"; }
 			{ directory = "temp"; mode = "0700"; }
+			"Documents"
+			"Projects"
+			"Books"
+			"Desktop"
+			"Games"
+			".cache/awww"
+			".local/share/Steam"
+			".steam"
 		];
 		files = [];
 	};
@@ -116,7 +158,11 @@
      obsidian
      anki
      easyeffects
+     fastfetch
+     btop
    ] ++ [ inputs.zen-browser.packages."${system}".default ];
+
+   services.tlp.enable = true;
 
    systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/wallpapers"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/wallpapers";
 
@@ -132,6 +178,7 @@
 
   programs.yazi.enable = true;
   programs.waybar.enable = true;
+  programs.steam.enable = true;
   
   users.users.root.initialPassword = "root";
   system.stateVersion = "26.05"; # Did you read the comment?
