@@ -83,8 +83,8 @@
 
 
 	hardware.graphics = {
-		#enable = true;
-		#enable32Bit = true;
+		enable = true;
+		enable32Bit = true;
 	};
 	hardware.amdgpu = {
 		overdrive.enable = true;
@@ -123,13 +123,21 @@
 			{ directory = ".config/easyeffects"; mode = "0700"; }
 			{ directory = "temp"; mode = "0700"; }
 			"Documents"
+			"Downloads"
 			"Projects"
 			"Books"
 			"Desktop"
 			"Games"
 			".cache/awww"
+
 			".local/share/Steam"
 			".steam"
+			"Faugus"
+			".local/share/faugus-launcher"
+			".locale/state/faugus-launcher"
+			".config/faugus-launcher"
+			".local/share/umu"
+			".config/heroic"
 		];
 		files = [];
 	};
@@ -139,7 +147,7 @@
 		config.init.defaultBranch = "main";
 	};
 
-  services.flatpak.enable = true;
+  #services.flatpak.enable = true;
   programs.hyprland.enable = true;
   programs.ssh.startAgent = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -160,9 +168,24 @@
      easyeffects
      fastfetch
      btop
+     unrar
+     faugus-launcher
+     hypridle
+     hyprlock
+     unzip
    ] ++ [ inputs.zen-browser.packages."${system}".default ];
 
    services.tlp.enable = true;
+
+   programs.firejail = {
+   	enable = true;
+	wrappedBinaries = {
+		#faugus-launcher = {
+		#	executable = "${pkgs.faugus-launcher}/bin/faugus-launcher";
+		#	profile = "/home/NoxAevi/Projects/FaugusProfile/faugus.profile";
+		#};
+	};
+  };
 
    systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/wallpapers"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/wallpapers";
 
