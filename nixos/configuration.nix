@@ -15,6 +15,7 @@
     imports =
         [ # Include the results of the hardware scan and modules.
             ./hardware-configuration.nix
+	    inputs.spicetify-nix.nixosModules.default
         ];
 
 	nixpkgs.config.allowUnfree = true;
@@ -56,6 +57,10 @@
 		efi.canTouchEfiVariables = true;
 	};
 
+	services.logind.settings.Login = {
+		HandlePowerKey = "hibernate";
+		HandlePowerKeyLongPress = "poweroff";
+	};
 
 	time.timeZone = "America/New_York";
 
@@ -98,14 +103,18 @@
 		initrd.enable = true;
 	};
 	services.lact.enable = true;
-
+	
+	security.rtkit.enable = true;
+	services.pipewire = {
+		enable = true;
+		alsa.enable = true;
+		alsa.support32Bit = true;
+		pulse.enable = true;
+		jack.enable = true;
+	};
 
 	programs.zsh = {
 		enable = true;
-		shellAliases = {
-			nrs = "sudo nixos-rebuild switch --flake /home/NoxAevi/.dotfiles/nixos";
-			vim = "nvim";
-		};
 	};
 	systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.zshrc"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/zsh/zshrc";
 	users.users.NoxAevi = {
@@ -175,9 +184,27 @@
      brightnessctl
      sdrpp
      osu-lazer-bin
+     zoxide
    ] ++ [ inputs.zen-browser.packages."${system}".default ];
 
    services.tlp.enable = true;
+
+   programs.spicetify = let
+   	spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+   in
+   {
+   	enable = true;
+
+	theme = spicePkgs.themes.comfy;
+	enabledExtensions = with spicePkgs.extensions; [
+		adblock
+		romajiConvert
+	];
+	enabledCustomApps = with spicePkgs.apps; [
+		lyricsPlus
+		marketplace
+	];
+   };
 
    hardware.rtl-sdr.enable = true;
 
