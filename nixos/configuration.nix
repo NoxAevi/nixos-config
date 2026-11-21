@@ -143,9 +143,11 @@
 			"Books"
 			"Desktop"
 			"Games"
+			".config/spotify"
 			".cache/awww"
 			".local/share/osu"
 			".local/share/Steam"
+			".local/share/zoxide"
 			".steam"
 		];
 		files = [];

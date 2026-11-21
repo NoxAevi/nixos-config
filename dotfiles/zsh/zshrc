@@ -2,5 +2,14 @@ export EDITOR=nvim
 
 export STARSHIP_CONFIG=/home/NoxAevi/.config/starship.toml
 
+# aliases
+
+alias nrs="sudo nixos-rebuild switch --flake /home/NoxAevi/.dotfiles/nixos"
+alias vim="nvim"
+alias cd="z"
+
 # starship
 eval "$(starship init zsh)"
+
+# zoxide
+eval "$(zoxide init zsh)"
