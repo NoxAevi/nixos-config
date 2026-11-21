@@ -26,6 +26,7 @@
 
 		files = [
 			"/etc/machine-id" #check if needed
+			"/var/lib/swapfile"
 		];
 
 		directories = [
@@ -38,6 +39,11 @@
 			"/etc/NetworkManager/system-connections"
 		];
 	};
+
+	swapDevices = [{
+		device = "/var/lib/swapfile";
+		size = 32*1024;
+	}];
 
 	systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/hypr"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/hypr";
 
@@ -129,15 +135,9 @@
 			"Desktop"
 			"Games"
 			".cache/awww"
-
+			".local/share/osu"
 			".local/share/Steam"
 			".steam"
-			"Faugus"
-			".local/share/faugus-launcher"
-			".locale/state/faugus-launcher"
-			".config/faugus-launcher"
-			".local/share/umu"
-			".config/heroic"
 		];
 		files = [];
 	};
@@ -167,27 +167,23 @@
      anki
      easyeffects
      fastfetch
+     waybar
      btop
      unrar
-     faugus-launcher
      hypridle
      hyprlock
-     unzip
+     brightnessctl
+     sdrpp
+     osu-lazer-bin
    ] ++ [ inputs.zen-browser.packages."${system}".default ];
 
    services.tlp.enable = true;
 
-   programs.firejail = {
-   	enable = true;
-	wrappedBinaries = {
-		#faugus-launcher = {
-		#	executable = "${pkgs.faugus-launcher}/bin/faugus-launcher";
-		#	profile = "/home/NoxAevi/Projects/FaugusProfile/faugus.profile";
-		#};
-	};
-  };
+   hardware.rtl-sdr.enable = true;
+
 
    systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/wallpapers"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/wallpapers";
+   systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.gitconfig"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/.gitconfig";
 
    #dotlink "/home/NoxAevi/.config/starship.toml" "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
    systemd.tmpfiles.settings."dotlinks"."/home/NoxAevi/.config/starship.toml"."L".argument = "/home/NoxAevi/.dotfiles/dotfiles/starship/starship.toml";
@@ -200,7 +196,7 @@
   ];  
 
   programs.yazi.enable = true;
-  programs.waybar.enable = true;
+  #programs.waybar.enable = true;
   programs.steam.enable = true;
   
   users.users.root.initialPassword = "root";
